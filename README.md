@@ -8,6 +8,11 @@ This is a simple Minetest mod by Shara RedCat that adds fireflies to the world o
 
 This mod has been adapted from the Hidden Worlds subgame to work with minetest_game. 
 
+Compatibility
+----
+
+Please note that the current stable version of Minetest (0.4.16) is unable to position the fireflies above groundlevel. The mod is still fully functional and can be used; but requires the current dev version of Minetest for optimal firefly placement. 
+
 License
 ----
 
