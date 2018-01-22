@@ -6,7 +6,9 @@ Intro
 
 This is a simple Minetest mod by Shara RedCat that adds fireflies to the world on mapgen, which can then be caught in a net and placed in bottles to provide light. Note that they only appear on newly generated map.
 
-This mod has been adapted from the Hidden Worlds subgame to work with minetest_game. 
+This mod has been adapted from the Hidden Worlds subgame to work with minetest_game.
+
+Thanks to shivajiva for helping work through the idea, and for assisting with the code.
 
 Compatibility
 ----
