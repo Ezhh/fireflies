@@ -29,7 +29,7 @@ minetest.register_node("fireflies:firefly", {
 
 
 -- bug net
-minetest.register_craftitem("fireflies:bugnet", {
+minetest.register_tool("fireflies:bugnet", {
 	description = "Bug Net",
 	inventory_image = "fireflies_bugnet.png",
 	on_use = function(itemstack, player, pointed_thing)
@@ -47,6 +47,10 @@ minetest.register_craftitem("fireflies:bugnet", {
 			if leftover:get_count() > 0 then
 				minetest.add_item(pointed_thing.under, node_name.." 1")
 			end	
+		end
+		if not minetest.setting_getbool("creative_mode") then
+			itemstack:add_wear(256)
+			return itemstack
 		end
 	end
 })
