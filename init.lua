@@ -85,6 +85,13 @@ minetest.register_node("fireflies:firefly_bottle", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.3, 0.25}
 	},
 	sounds = default.node_sound_glass_defaults(),
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		if minetest.get_node(pos_above).name == "air" then
+			minetest.set_node(pos, {name = "vessels:glass_bottle"})
+			minetest.set_node(pos_above, {name = "fireflies:firefly"})
+		end
+	end
 })
 
 minetest.register_craft( {
