@@ -33,9 +33,8 @@ minetest.register_tool("fireflies:bugnet", {
 	description = "Bug Net",
 	inventory_image = "fireflies_bugnet.png",
 	on_use = function(itemstack, player, pointed_thing)
-		if not pointed_thing or 
-		pointed_thing.type ~= "node" or 
-		minetest.is_protected(pointed_thing.under, player:get_player_name()) then
+		if not pointed_thing or pointed_thing.type ~= "node" or 
+				minetest.is_protected(pointed_thing.under, player:get_player_name()) then
 			return
 		end
 		local node_name = minetest.get_node(pointed_thing.under).name
@@ -92,6 +91,10 @@ minetest.register_node("fireflies:firefly_bottle", {
 	sounds = default.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		if minetest.is_protected(pos, player:get_player_name()) or
+				minetest.is_protected(pos_above, player:get_player_name()) then
+			return
+		end
 		if minetest.get_node(pos_above).name == "air" then
 			minetest.set_node(pos, {name = "vessels:glass_bottle"})
 			minetest.set_node(pos_above, {name = "fireflies:firefly"})
