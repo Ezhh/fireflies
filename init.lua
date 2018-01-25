@@ -25,6 +25,10 @@ minetest.register_node("fireflies:firefly", {
 		fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
 	},
 	light_source = 6,
+	floodable = true,
+	on_flood = function(pos, oldnode, newnode)
+		minetest.add_item(pos, "fireflies:firefly 1")
+	end
 })
 
 
