@@ -38,4 +38,4 @@ fireflies_firefly_animated.png
 fireflies_lantern.png and fireflies_bottle.png - modified from Vanessa Ezekowitz's vessels_glass_bottle.png from vessels in minetest_game
 
 Tenplus1 (cc0):
-fireflies_bugnet.png
+fireflies_bugnet.png - with edits by Shara RedCat
