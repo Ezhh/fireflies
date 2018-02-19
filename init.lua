@@ -33,7 +33,7 @@ minetest.register_node("fireflies:firefly", {
 
 
 -- bug net
-minetest.register_tool("fireflies:bugnet", {
+minetest.register_tool("fireflies:bug_net", {
 	description = "Bug Net",
 	inventory_image = "fireflies_bugnet.png",
 	on_use = function(itemstack, player, pointed_thing)
@@ -59,7 +59,7 @@ minetest.register_tool("fireflies:bugnet", {
 })
 
 minetest.register_craft( {
-	output = "fireflies:bugnet 1",
+	output = "fireflies:bug_net",
 	recipe = {
 		{"farming:string", "farming:string", ""},
 		{"farming:string", "farming:string", ""},
@@ -94,20 +94,31 @@ minetest.register_node("fireflies:firefly_bottle", {
 	},
 	sounds = default.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		local lower_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
 		if minetest.is_protected(pos, player:get_player_name()) or
-				minetest.is_protected(pos_above, player:get_player_name()) then
+				minetest.get_node(lower_pos).name ~= "air" then
 			return
 		end
-		if minetest.get_node(pos_above).name == "air" then
+
+		local upper_pos = {x = pos.x, y = pos.y + 2, z = pos.z}
+		local firefly_pos
+
+		if not minetest.is_protected(upper_pos, player:get_player_name()) and
+				minetest.get_node(upper_pos).name == "air" then
+			firefly_pos = upper_pos
+		elseif not minetest.is_protected(lower_pos, player:get_player_name()) then
+			firefly_pos = lower_pos
+		end
+
+		if firefly_pos then
 			minetest.set_node(pos, {name = "vessels:glass_bottle"})
-			minetest.set_node(pos_above, {name = "fireflies:firefly"})
+			minetest.set_node(firefly_pos, {name = "fireflies:firefly"})
 		end
 	end
 })
 
 minetest.register_craft( {
-	output = "fireflies:firefly_bottle 1",
+	output = "fireflies:firefly_bottle",
 	recipe = {
 		{"", "", ""},
 		{"", "fireflies:firefly", ""},
@@ -116,27 +127,47 @@ minetest.register_craft( {
 })
 
 
--- register firefly as decorations
+-- register fireflies as decorations
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:dirt_with_grass", "default:dirt_with_coniferous_litter", "default:dirt_with_rainforest_litter", "default:dirt"},
+	place_on = {
+		"default:dirt_with_grass",
+		"default:dirt_with_coniferous_litter",
+		"default:dirt_with_rainforest_litter",
+		"default:dirt"
+	},
 	place_offset_y = 2,
 	sidelen = 80,
 	fill_ratio = 0.002,
-	biomes = {"deciduous_forest", "coniferous_forest", "rainforest", "rainforest_swamp"},
-	y_min = 1,
+	biomes = {
+		"deciduous_forest",
+		"coniferous_forest",
+		"rainforest",
+		"rainforest_swamp"
+	},
+	y_min = -1,
 	y_max = 31000,
 	decoration = "fireflies:firefly",
 })
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:dirt_with_grass", "default:dirt_with_coniferous_litter", "default:dirt_with_rainforest_litter", "default:dirt"},
+	place_on = {
+		"default:dirt_with_grass",
+		"default:dirt_with_coniferous_litter",
+		"default:dirt_with_rainforest_litter",
+		"default:dirt"
+	},
 	place_offset_y = 3,
 	sidelen = 80,
 	fill_ratio = 0.002,
-	biomes = {"deciduous_forest", "coniferous_forest", "rainforest", "rainforest_swamp"},
-	y_min = 1,
+	biomes = {
+		"deciduous_forest",
+		"coniferous_forest",
+		"rainforest",
+		"rainforest_swamp"
+	},
+	y_min = -1,
 	y_max = 31000,
 	decoration = "fireflies:firefly",
 })
